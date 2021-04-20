@@ -15,6 +15,10 @@ export class PostsService {
         return this.postsRepository.getLatestsPosts();
     }
 
+    getPost(id: number): Promise<Posts> {
+        return this.postsRepository.getPost(id);
+    }
+
     createTask(createPosts: CreatePosts): Promise<Posts> {
         return this.postsRepository.createPost(createPosts);
     }

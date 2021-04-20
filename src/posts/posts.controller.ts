@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Posts } from './posts.entity';
 import { CreatePosts } from './dto/create-post.dto';
@@ -15,6 +15,11 @@ export class PostsController {
     @Get('latests')
     getLatestPosts(): Promise<Posts[]> {
         return this.postsService.getLatestsPosts();
+    }
+
+    @Get('/:id')
+    getPost(@Param('id') id: number) {
+        return this.postsService.getPost(id);
     }
 
     @Post()

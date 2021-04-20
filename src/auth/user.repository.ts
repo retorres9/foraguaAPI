@@ -1,5 +1,6 @@
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, UnauthorizedException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
+import { AuthUserDto } from "./dto/auth-user.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from './user.entity';
 
@@ -25,6 +26,15 @@ export class UserRespository extends  Repository<User> {
             }
             
         }
+    }
+
+    async validateUserPassword(authUserDto: AuthUserDto): Promise<User> {
+        const {username, password} = authUserDto;
+        const user = await this.findOne({username});
+        if (!user) {
+            throw new UnauthorizedException({message: 'Usuario no encontrado'});
+        }
+        return user;
     }
 
 }
