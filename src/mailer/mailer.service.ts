@@ -3,6 +3,7 @@ import { createTransport } from 'nodemailer';
 import * as Mail from 'nodemailer/lib/mailer'
 import { MailSentDto } from './interface/mail-sent.dto';
 import { MailDto } from './interface/mail.dto';
+import { environment } from '../enviroments/enviroment';
 
 @Injectable()
 export class MailerService {
@@ -13,7 +14,7 @@ export class MailerService {
             port: 2525,
             auth: {
                 user: 'ticowrc10@gmail.com',
-                pass: 'E237593312399839A78429C93F0D2E52E103'
+                pass: environment.SMTPKey
             }
         })
     }
@@ -25,7 +26,7 @@ export class MailerService {
         
         const info = ({
             from: `"${name}" ticowrc10@gmail.com`, // sender address
-            to: "roberthtorres40@yahoo.es", // list of receivers
+            to: "roberthtorres40@yahoo.es, mauro.02.10.1994@gmail.com, lh94am@gmail.com", // list of receivers
             subject: "Page contact form", // Subject line
             text: `${name} con correo ${from} ha enviado un correo mediante el formulario de la página de foragua, a continuación su contenido
             
